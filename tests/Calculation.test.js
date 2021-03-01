@@ -5,6 +5,10 @@ const Product = require('../src/Operations/Product');
 const Quotient = require('../src/Operations/Quotient');
 const Square = require('../src/Operations/Square');
 const SquareRoot = require('../src/Operations/SquareRoot');
+const file = require('../src/fileOps/File');
+const Read = require('../src/CSV/Read');
+const City = require('../src/models/City');
+const expect = require('expect');
 
 test('Test of Calculation Instantiation', () => {
     let op = Sum;
@@ -48,4 +52,29 @@ test('Test Get results for Square function', () => {
     let op = SquareRoot;
     let calculation = new Calculation(81,0.5,op);
     expect(calculation.GetResults()).toBe(9);
+});
+
+
+//tests for CSV
+test('Find absolute path', () =>{
+   const fs = require('fs');
+   let file = 'data/worldcities.csv';
+   let abPath = file.getAbsolutePath(file);
+
+   fs.access(abPath, fs.F_OK, (err) => {
+       let fileFound;
+       if(err){
+           fileFound = false;
+       }
+       else{
+           fileFound = true;
+       }
+       expect(fileFound).toBeTruthy();
+   });
+});
+
+test('Read CSV file', () => {
+   let file = 'data/worldcities.csv';
+   let records = Read.getRecords(file, City);
+   expect(records.length).toBe(6);
 });
