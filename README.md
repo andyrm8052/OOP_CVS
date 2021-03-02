@@ -1,7 +1,7 @@
 ### Travis
-[![Build Status](https://travis-ci.org/andyrm8052/basic_calculator_OOP.svg?branch=main)](https://travis-ci.org/andyrm8052/basic_calculator_OOP)
+[![Build Status](https://travis-ci.org/andyrm8052/OOP_CVS.svg?branch=main)](https://travis-ci.org/andyrm8052/OOP_CVS)
 ### Coveralls
-[![Coverage Status](https://coveralls.io/repos/github/andyrm8052/basic_calculator_OOP/badge.svg?branch=main)](https://coveralls.io/github/andyrm8052/basic_calculator_OOP?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/andyrm8052/OOP_CVS/badge.svg?branch=main)](https://coveralls.io/github/andyrm8052/OOP_CVS?branch=main)
 
 The problems I'm having with these codes are that parse is not 
 defined, but it is. Calculation.test.js apparently reads "parse" as
