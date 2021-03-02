@@ -1,6 +1,9 @@
-module.exports = class file {
-    static getAbsolutePath(file) {
+module.exports = class File {
+
+    static getAbsolutePath(filename) {
         const path = require('path');
-        return path.resolve(file);
+        let fullPath = path.resolve(filename);
+        return fullPath;
     }
-};
+
+}

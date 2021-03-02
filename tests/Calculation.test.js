@@ -1,15 +1,22 @@
 const Calculation = require('../src/models/Calculation');
-const Sum = require('../src/Operations/Sum');
-const Difference = require('../src/Operations/Difference');
-const Product = require('../src/Operations/Product');
-const Quotient = require('../src/Operations/Quotient');
-const Square = require('../src/Operations/Square');
-const SquareRoot = require('../src/Operations/SquareRoot');
+//const Sum = require('../src/Operations/Sum');
+const Sum = require('../data/sum.csv');
+//const Difference = require('../src/Operations/Difference');
+const Difference = require('../data/difference.csv');
+//const Product = require('../src/Operations/Product');
+const Product = require('../data/product.csv');
+//const Quotient = require('../src/Operations/Quotient');
+const Quotient = require('../data/division.csv');
+//const Square = require('../src/Operations/Square');
+const Square = require('../data/square.csv');
+//const SquareRoot = require('../src/Operations/SquareRoot');
+const SquareRoot = require('../data/squareroot.csv');
 const file = require('../src/fileOps/File');
 const Read = require('../src/CSV/Read');
 const City = require('../src/models/City');
 const expect = require('expect');
 
+/*
 test('Test of Calculation Instantiation', () => {
     let op = Sum;
     let calculation = new Calculation(1,2,op);
@@ -17,64 +24,41 @@ test('Test of Calculation Instantiation', () => {
     expect(calculation.b).toBe(2);
     expect(calculation.op).toBe(op);
 });
+*/
 
-test('Test Get results for Sum function', () => {
-    let op = Sum;
-    let calculation = new Calculation(1,2,op);
-    expect(calculation.GetResults()).toBe(3);
+//test utilizing the CSV reader and files
+test('Test Get results for Sum function using CSV', () => {
+    let file = Read.getRecords('../data/sum.csv');
+    let calculation = new Calculation(parse(file[1]), parse(file[2]), Sum); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[3])); //same as above
 });
 
-test('Test Get results for Difference function', () => {
-    let op = Difference;
-    let calculation = new Calculation(1,2,op);
-    expect(calculation.GetResults()).toBe(-1);
+test('Test Get results for Difference function using CSV', () => {
+    let file = Read.getRecords('../data/difference.csv');
+    let calculation = new Calculation(parse(file[0]), parse(file[1]), Difference); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[2])); //same as above
 });
 
-test('Test Get results for Product function', () => {
-    let op = Product;
-    let calculation = new Calculation(1,2,op);
-    expect(calculation.GetResults()).toBe(2);
+test('Test Get results for Product function using CSV', () => {
+    let file = Read.getRecords('../data/product.csv');
+    let calculation = new Calculation(parse(file[4]), parse(file[5]), Product); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[6])); //same as above
 });
 
-test('Test Get results for Quotient function', () => {
-    let op = Quotient;
-    let calculation = new Calculation(1,2,op);
-    expect(calculation.GetResults()).toBe(0.5);
+test('Test Get results for Quotient function using CSV', () => {
+    let file = Read.getRecords('../data/division.csv');
+    let calculation = new Calculation(parse(file[6]), parse(file[7]), Quotient); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[8])); //same as above
 });
 
-test('Test Get results for Square function', () => {
-    let op = Square;
-    let calculation = new Calculation(2,2,op);
-    expect(calculation.GetResults()).toBe(4);
+test('Test Get results for Square function using CSV', () => {
+    let file = Read.getRecords('../data/square.csv');
+    let calculation = new Calculation(parse(file[2]), parse(file[3]), Square); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[4])); //same as above
 });
 
-test('Test Get results for Square function', () => {
-    let op = SquareRoot;
-    let calculation = new Calculation(81,0.5,op);
-    expect(calculation.GetResults()).toBe(9);
-});
-
-
-//tests for CSV
-test('Find absolute path', () =>{
-   const fs = require('fs');
-   let file = 'data/worldcities.csv';
-   let abPath = file.getAbsolutePath(file);
-
-   fs.access(abPath, fs.F_OK, (err) => {
-       let fileFound;
-       if(err){
-           fileFound = false;
-       }
-       else{
-           fileFound = true;
-       }
-       expect(fileFound).toBeTruthy();
-   });
-});
-
-test('Read CSV file', () => {
-   let file = 'data/worldcities.csv';
-   let records = Read.getRecords(file, City);
-   expect(records.length).toBe(6);
+test('Test Get results for Square Root function using CSV', () => {
+    let file = Read.getRecords('../data/squareroot.csv');
+    let calculation = new Calculation(parse(file[3]), parse(file[4]), SquareRoot); //same as above
+    expect(calculation.GetResults()).toBe(parse(file[5])); //same as above
 });
